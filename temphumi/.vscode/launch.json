@@ -1,17 +1,14 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Blinky Remote Debug",
+            "name": "Temp/Humi Remote Debug",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
             "program": "/usr/bin/dotnet/dotnet",
-            "args": ["/home/pi/blinky/blinky.dll"],
-            "cwd": "/home/pi/blinky",
+            "args": ["/home/pi/temphumi/blinky.dll"],
+            "cwd": "/home/pi/temphumi",
             "stopAtEntry": false,
             "console": "internalConsole",
             "pipeTransport": {
