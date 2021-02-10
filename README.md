@@ -10,7 +10,7 @@ mkdir blinky
 ### From dev machine, in project directory.
 dotnet publish
 
-scp -r .\bin\Debug\net5.0\publish\* pi@pi-cdp:/home/pi/blinky
+scp -r .\bin\Debug\net5.0\publish\\* pi@pi-cdp:/home/pi/blinky
 
 ### Run on Pi:
 dotnet blinky.dll &
