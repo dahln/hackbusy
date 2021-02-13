@@ -7,7 +7,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             "program": "/usr/bin/dotnet/dotnet",
-            "args": ["/home/pi/temphumi/blinky.dll"],
+            "args": ["/home/pi/temphumi/temphumi.dll"],
             "cwd": "/home/pi/temphumi",
             "stopAtEntry": false,
             "console": "internalConsole",
@@ -17,7 +17,7 @@
                 "pipeArgs": [
                     "-pw",
                     "raspberry",
-                    "root@pi-cdp"
+                    "pi@picdp"
                 ],
                 "debuggerPath": "/home/pi/vsdbg/vsdbg"
             }

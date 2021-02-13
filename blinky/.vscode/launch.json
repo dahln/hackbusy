@@ -20,7 +20,7 @@
                 "pipeArgs": [
                     "-pw",
                     "raspberry",
-                    "root@pi-cdp"
+                    "root@picdp"
                 ],
                 "debuggerPath": "/home/pi/vsdbg/vsdbg"
             }
