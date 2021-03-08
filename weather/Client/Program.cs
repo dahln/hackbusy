@@ -7,6 +7,11 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Blazored.Toast;
+using Blazored.LocalStorage;
+using Blazored.Modal;
+using BlazorSpinner;
+using weather.Client.Services;
 
 namespace weather.Client
 {
@@ -15,9 +20,19 @@ namespace weather.Client
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
-            builder.RootComponents.Add<App>("#app");
+            builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddHttpClient("weather.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+            // Supply HttpClient instances that include access tokens when making requests to the server project
+            builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("weather.ServerAPI"));
+
+            builder.Services.AddScoped<API>();
+            builder.Services.AddScoped<AppState>();
+            builder.Services.AddScoped<SpinnerService>();
+
+            builder.Services.AddBlazoredLocalStorage();
+            builder.Services.AddBlazoredToast();
+            builder.Services.AddBlazoredModal();
 
             await builder.Build().RunAsync();
         }

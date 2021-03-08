@@ -1,17 +1,17 @@
 @inherits LayoutComponentBase
+@using Blazored.Toast.Configuration
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+<Spinner></Spinner>
 
-    <div class="main">
-        <div class="top-row px-4">
-            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
-        </div>
+<BlazoredToasts Position="ToastPosition.BottomLeft"
+                Timeout="4"
+                IconType="IconType.FontAwesome"
+                SuccessClass="success-toast-override"
+                SuccessIcon="fas fa-check"
+                ErrorIcon="fas fa-exclamation"/>
 
-        <div class="content px-4">
-            @Body
-        </div>
-    </div>
+<TopNavigation />
+
+<div class="mt-3 mb-5 px-4">
+    @Body
 </div>
