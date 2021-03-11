@@ -1,17 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="5.0.3" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="5.0.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.7" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Client\weather.Client.csproj" />
-    <ProjectReference Include="..\Shared\weather.Shared.csproj" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<ProjectReference Include="..\Client\weather.Client.csproj" />
+		<ProjectReference Include="..\Shared\weather.Shared.csproj" />
+		<ProjectReference Include="..\weather.Background\weather.Background.csproj" />
+		<ProjectReference Include="..\weather.Logic\weather.Logic.csproj" />
+	</ItemGroup>
 
 </Project>
