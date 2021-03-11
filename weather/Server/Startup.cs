@@ -47,8 +47,15 @@ namespace weather.Server
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WeatherDBContext dbContext)
         {
+            //Automatic DB migrations on startup.
+            var migrations = dbContext.Database.GetPendingMigrations();
+            if(migrations.Count() > 0)
+                dbContext.Database.Migrate();
+
+            app.UseForwardedHeaders();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
