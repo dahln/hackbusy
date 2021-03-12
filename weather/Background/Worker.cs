@@ -14,6 +14,7 @@ using Iot.Device.CharacterLcd;
 using Iot.Device.Pcx857x;
 using Iot.Device.Common;
 using Iot.Device.DHTxx;
+using Microsoft.EntityFrameworkCore;
 
 namespace weather.Background
 {
@@ -34,6 +35,10 @@ namespace weather.Background
             {
                 var _db = scope.ServiceProvider.GetRequiredService<WeatherDBContext>();
                 var _businessLogic = scope.ServiceProvider.GetRequiredService<BusinessLogic>();
+
+                var migrations = await _db.Database.GetPendingMigrationsAsync();
+                    if(migrations.Count() > 0)
+                        await _db.Database.MigrateAsync();
 
                 await _businessLogic.CreateConditionEntry(DateTime.UtcNow, 12, 24, 42);
 
