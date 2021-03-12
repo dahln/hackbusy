@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using weather.Logic.Database;
+using weather.Logic.Model;
 
 namespace weather.Logic
 {
@@ -15,9 +16,18 @@ namespace weather.Logic
             _db = db;
         }
 
-        public void CreateConditionEntry(DateTime loggedAt, double f)
+        async public Task CreateConditionEntry(DateTime loggedAt, double degreesFahrenheit, double degreesCelsius, double humidity)
         {
-            return;
+            LoggedCondition condition = new LoggedCondition()
+            {
+                DegreesFahrenheit = degreesFahrenheit,
+                DegreesCelsius = degreesCelsius,
+                Humidity = humidity,
+                LoggedAt = loggedAt
+            };
+
+            _db.Conditions.Add(condition);
+            await _db.SaveChangesAsync();
         }
     }
 }

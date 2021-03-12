@@ -12,9 +12,10 @@ namespace weather.Logic.Database
     {
         public WeatherDBContext(DbContextOptions options) : base(options)
         {
+            Database.EnsureCreated();
         }
 
-        public DbSet<LoggedCondition> Series { get; set; }
+        public DbSet<LoggedCondition> Conditions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

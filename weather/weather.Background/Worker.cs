@@ -5,15 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Linq;
+using System.Threading.Tasks;
+using weather.Logic;
+using weather.Logic.Database;
 using System.Device.Gpio;
 using System.Device.I2c;
 using Iot.Device.CharacterLcd;
 using Iot.Device.Pcx857x;
 using Iot.Device.Common;
 using Iot.Device.DHTxx;
-using System.Threading.Tasks;
-using weather.Logic;
-using weather.Logic.Database;
 
 namespace weather.Background
 {
@@ -33,7 +33,10 @@ namespace weather.Background
             using (var scope = Services.CreateScope())
             {
                 var _db = scope.ServiceProvider.GetRequiredService<WeatherDBContext>();
-                var utilityLogic = scope.ServiceProvider.GetRequiredService<BusinessLogic>();
+                var _businessLogic = scope.ServiceProvider.GetRequiredService<BusinessLogic>();
+
+                // await _businessLogic.CreateConditionEntry(DateTime.UtcNow, 12, 24, 42);
+
 
                 //Setup LCD Screen
                 using I2cDevice i2c = I2cDevice.Create(new I2cConnectionSettings(1, 0x27));
@@ -57,8 +60,10 @@ namespace weather.Background
 
                         if (dht.IsLastReadSuccessful && temperature.DegreesCelsius >= -20 && temperature.DegreesCelsius <= 60)
                         {
-                            string temperatureString = $"{Math.Round(dht.Temperature.DegreesFahrenheit, 2)}F   {Math.Round(dht.Temperature.DegreesCelsius, 2)}C";
-                            string humidityString = $"Humidity: {dht.Humidity.Percent}%";
+                            string temperatureString = $"{Math.Round(temperature.DegreesFahrenheit, 2)}F   {Math.Round(temperature.DegreesCelsius, 2)}C";
+                            string humidityString = $"Humidity: {humidity.Percent}%";
+
+                            await _businessLogic.CreateConditionEntry(DateTime.UtcNow, temperature.DegreesFahrenheit, temperature.DegreesCelsius, humidity.Percent);
 
                             lcd.Clear();
 

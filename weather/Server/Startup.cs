@@ -50,9 +50,7 @@ namespace weather.Server
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WeatherDBContext dbContext)
         {
             //Automatic DB migrations on startup.
-            var migrations = dbContext.Database.GetPendingMigrations();
-            if(migrations.Count() > 0)
-                dbContext.Database.Migrate();
+            dbContext.Database.Migrate();
 
             app.UseForwardedHeaders();
 
