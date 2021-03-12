@@ -35,7 +35,7 @@ namespace weather.Background
                 var _db = scope.ServiceProvider.GetRequiredService<WeatherDBContext>();
                 var _businessLogic = scope.ServiceProvider.GetRequiredService<BusinessLogic>();
 
-                // await _businessLogic.CreateConditionEntry(DateTime.UtcNow, 12, 24, 42);
+                await _businessLogic.CreateConditionEntry(DateTime.UtcNow, 12, 24, 42);
 
 
                 //Setup LCD Screen

@@ -8,9 +8,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "weather.Client", "Client\we
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "weather.Shared", "Shared\weather.Shared.csproj", "{D379AC98-150A-406C-902A-F3BF7C19AC85}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "weather.Background", "weather.Background\weather.Background.csproj", "{A776417D-C608-4CAF-AA56-07712D93FC2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "weather.Background", "Background\weather.Background.csproj", "{A776417D-C608-4CAF-AA56-07712D93FC2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "weather.Logic", "weather.Logic\weather.Logic.csproj", "{B23373B6-55D5-4B93-8ED2-7C06A0D859FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "weather.Logic", "Logic\weather.Logic.csproj", "{B23373B6-55D5-4B93-8ED2-7C06A0D859FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

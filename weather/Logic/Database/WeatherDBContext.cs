@@ -12,7 +12,6 @@ namespace weather.Logic.Database
     {
         public WeatherDBContext(DbContextOptions options) : base(options)
         {
-            Database.EnsureCreated();
         }
 
         public DbSet<LoggedCondition> Conditions { get; set; }
