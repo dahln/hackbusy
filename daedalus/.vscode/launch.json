@@ -10,8 +10,8 @@
             "request": "launch",
             "preLaunchTask": "build",
             "program": "/usr/bin/dotnet/dotnet",
-            "args": ["/home/pi/bme/bme280.dll"],
-            "cwd": "/home/pi/bme",
+            "args": ["/home/pi/daedalus/daedalus.dll"],
+            "cwd": "/home/pi/daedalus",
             "stopAtEntry": false,
             "console": "internalConsole",
             "pipeTransport": {
