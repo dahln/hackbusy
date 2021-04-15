@@ -32,7 +32,7 @@ namespace daedalus.iot
             int measurementTime = bme280.GetMeasurementDuration();
 
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:5001/");
+            client.BaseAddress = new Uri(configuration["Server"]);
 
             while (true)
             {
@@ -62,11 +62,11 @@ namespace daedalus.iot
                 Console.WriteLine($"Estimated altitude: {condition.AltitudeCentimeters:#} cm");
                 Console.WriteLine($"JWT: {key}");
 
-                //var json = JsonConvert.SerializeObject(condition);
-                //var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-                //var response = await client.PostAsync("/api/v1/log", stringContent);
+                var json = JsonConvert.SerializeObject(condition);
+                var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("/api/v1/log", stringContent);
 
-                //await response.Content.ReadAsStringAsync();
+                // await response.Content.ReadAsStringAsync();
 
                 Thread.Sleep(1000);
             }

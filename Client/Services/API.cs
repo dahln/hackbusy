@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Components;
 using daedalus.Shared;
 using Blazored.Toast.Services;
 using BlazorSpinner;
+using daedalus.Shared.Model;
 
 namespace daedalus.Client.Services
 {
@@ -26,12 +27,11 @@ namespace daedalus.Client.Services
             _toastService = toastService;
             _spinnerService = spinnerService;
         }
-
-        // async public Task<Customer> CustomerCreate(Customer content)
-        // {
-        //     return await PostAsync<Customer>("api/v1/customer", content);
-        // }
         
+        async public Task<List<LoggedCondition>> SearchConditions(long start, long end)
+        {
+            return await GetAsync<List<LoggedCondition>>($"api/v1/log/search/{start}/{end}");
+        }
 
         #region HTTP Methods
         private async Task GetAsync(string path)

@@ -1,6 +1,45 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+@using daedalus.Shared.Model
 
-Welcome to your new app.
+@inject daedalus.Client.Services.API API
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Logged At</th>
+            <th>Temperature</th>
+            <th>Humidity</th>
+            <th>Pressure</th>
+            <th>Altitude</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var condition in conditions)
+        {
+            <tr>
+                <td>@condition.LoggedAt</td>
+                <td>@condition.DegreesCelsius</td>
+                <td>@condition.HumidityPercentage</td>
+                <td>@condition.PressureMillibars</td>
+                <td>@condition.AltitudeCentimeters</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@code {
+
+    private List<LoggedCondition> conditions { get; set; } = new List<LoggedCondition>();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        long end = DateTime.UtcNow.Ticks;
+        long start = DateTime.UtcNow.AddHours(-4).Ticks;
+
+        conditions = await API.SearchConditions(start, end);
+    }
+
+}
 
