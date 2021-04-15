@@ -84,7 +84,7 @@ namespace daedalus.Server.Controllers
             List<Shared.Model.LoggedCondition> response = new List<Shared.Model.LoggedCondition>();
 
             if (results.Any())
-                response = results.Select(r => r.ToSharedCondition()).ToList();
+                response = results.Select(r => r.ToSharedCondition()).OrderByDescending(r => r.LoggedAt).ToList();
 
             return Ok(response);
         }
