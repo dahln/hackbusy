@@ -68,7 +68,8 @@ namespace daedalus.iot
 
                 // await response.Content.ReadAsStringAsync();
 
-                Thread.Sleep(1000);
+                //Thread.Sleep(1000); //This works, but it is more often than I need
+                Thread.Sleep(60000); //New reading every 1 minute
             }
         }
     }
