@@ -7,6 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Iot.Device.Bmxx80;
 using Iot.Device.Bmxx80.PowerMode;
+using JWT.Algorithms;
+using JWT.Builder;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
@@ -62,8 +64,13 @@ namespace daedalus.iot
                 Console.WriteLine($"Estimated altitude: {condition.AltitudeCentimeters:#} cm");
                 Console.WriteLine($"JWT: {key}");
 
-                var json = JsonConvert.SerializeObject(condition);
-                var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+                var jwt = JwtBuilder.Create()
+                    .WithAlgorithm(new HMACSHA256Algorithm())
+                    .WithSecret(configuration["JWT_Key"])
+                    .AddClaim("Condition", condition)
+                    .Encode();
+
+                var stringContent = new StringContent(jwt, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync("/api/v1/log", stringContent);
 
                 // await response.Content.ReadAsStringAsync();

@@ -8,6 +8,9 @@ using daedalus.Shared;
 using daedalus.Server.Database;
 using Microsoft.EntityFrameworkCore;
 using daedalus.Server.Utility;
+using JWT.Builder;
+using JWT.Algorithms;
+using Microsoft.Extensions.Configuration;
 
 namespace daedalus.Server.Controllers
 {
@@ -15,22 +18,34 @@ namespace daedalus.Server.Controllers
     public class LoggingController : ControllerBase
     {
         private readonly daedalusDBContext _db;
-        public LoggingController(daedalusDBContext db)
+        private static IConfiguration _configuration;
+
+        public LoggingController(IConfiguration configuration, daedalusDBContext db)
         {
             _db = db;
+            _configuration = configuration;
         }
 
         [Route("api/v1/log")]
         [HttpPost]
-        async public Task<IActionResult> LogCondition([FromBody] Shared.Model.LoggedCondition model)
+        async public Task<IActionResult> LogCondition([FromBody] Shared.Model.JwtEncodedCondition model)
         {
+            var loggedConditionFromJwt = JwtBuilder.Create()
+                   .WithAlgorithm(new HMACSHA256Algorithm())
+                   .WithSecret(_configuration["JWT_Key"])
+                   .MustVerifySignature()
+                   .Decode<Shared.Model.LoggedCondition>(model.Content);
+
+            if (loggedConditionFromJwt == null)
+                return BadRequest();
+
             LoggedCondition loggedCondition = new LoggedCondition()
             {
-                LoggedAt = model.LoggedAt,
-                DegreesCelsius = model.DegreesCelsius,
-                AltitudeCentimeters = model.AltitudeCentimeters,
-                HumidityPercentage = model.HumidityPercentage,
-                PressureMillibars = model.PressureMillibars
+                LoggedAt = loggedConditionFromJwt.LoggedAt,
+                DegreesCelsius = loggedConditionFromJwt.DegreesCelsius,
+                AltitudeCentimeters = loggedConditionFromJwt.AltitudeCentimeters,
+                HumidityPercentage = loggedConditionFromJwt.HumidityPercentage,
+                PressureMillibars = loggedConditionFromJwt.PressureMillibars
             };
 
             _db.Conditions.Add(loggedCondition);

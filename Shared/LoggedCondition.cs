@@ -4,6 +4,11 @@ using System.Text;
 
 namespace daedalus.Shared.Model
 {
+    public class JwtEncodedCondition
+    {
+        public string Content { get; set; }
+    }
+
     public class LoggedCondition
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
