@@ -55,12 +55,6 @@ namespace daedalus.iot
                     AltitudeCentimeters = altValue.Centimeters
                 };
 
-                Console.WriteLine($"Date/Time: {condition.LoggedAt} UTC");
-                Console.WriteLine($"Temperature: {condition.DegreesCelsius:0.#}\u00B0C");
-                Console.WriteLine($"Pressure: {condition.PressureMillibars:#.##} millibars");
-                Console.WriteLine($"Relative humidity: {condition.HumidityPercentage:#.##}%");
-                Console.WriteLine($"Estimated altitude: {condition.AltitudeCentimeters:#} cm");
-
                 //Prepare Condition JWT
                 var jwt = JwtBuilder.Create()
                     .WithAlgorithm(new HMACSHA256Algorithm())
@@ -76,9 +70,6 @@ namespace daedalus.iot
                 };
                 var stringContent = new StringContent(JsonConvert.SerializeObject(conditionsAsJWT), Encoding.UTF8, "application/json");
                 var response = await client.PostAsync("/api/v1/condition", stringContent);
-
-                var message = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(message);
 
                 //Thread.Sleep(1000); //This works, but it is more often than I need
                 Thread.Sleep(60000); //New reading every 1 minute
