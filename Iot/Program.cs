@@ -1,12 +1,12 @@
 ﻿using System;
-//using System.Device.I2c;
+using System.Device.I2c;
 using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-//using Iot.Device.Bmxx80;
-//using Iot.Device.Bmxx80.PowerMode;
+using Iot.Device.Bmxx80;
+using Iot.Device.Bmxx80.PowerMode;
 using JWT.Algorithms;
 using JWT.Builder;
 using Microsoft.Extensions.Configuration;
@@ -27,32 +27,32 @@ namespace daedalus.iot
             var key = configuration["JWT_Key"];
 
 
-            //var i2cSettings = new I2cConnectionSettings(1, Bme280.SecondaryI2cAddress);
-            //using I2cDevice i2cDevice = I2cDevice.Create(i2cSettings);
-            //using var bme280 = new Bme280(i2cDevice);
+            var i2cSettings = new I2cConnectionSettings(1, Bme280.SecondaryI2cAddress);
+            using I2cDevice i2cDevice = I2cDevice.Create(i2cSettings);
+            using var bme280 = new Bme280(i2cDevice);
 
-            //int measurementTime = bme280.GetMeasurementDuration();
+            int measurementTime = bme280.GetMeasurementDuration();
 
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(configuration["Server"]);
 
             while (true)
             {
-                //bme280.SetPowerMode(Bmx280PowerMode.Forced);
-                //Thread.Sleep(measurementTime);
+                bme280.SetPowerMode(Bmx280PowerMode.Forced);
+                Thread.Sleep(measurementTime);
 
-                //bme280.TryReadTemperature(out var tempValue);
-                //bme280.TryReadPressure(out var preValue);
-                //bme280.TryReadHumidity(out var humValue);
-                //bme280.TryReadAltitude(out var altValue);
+                bme280.TryReadTemperature(out var tempValue);
+                bme280.TryReadPressure(out var preValue);
+                bme280.TryReadHumidity(out var humValue);
+                bme280.TryReadAltitude(out var altValue);
 
                 var condition = new Shared.Model.Condition()
                 {
                     LoggedAt = DateTime.UtcNow,
-                    DegreesCelsius = 25,//tempValue.DegreesCelsius,
-                    PressureMillibars = 25,//preValue.Millibars,
-                    HumidityPercentage = 25,//humValue.Percent,
-                    AltitudeCentimeters = 25//altValue.Centimeters
+                    DegreesCelsius = tempValue.DegreesCelsius,
+                    PressureMillibars = preValue.Millibars,
+                    HumidityPercentage = humValue.Percent,
+                    AltitudeCentimeters = altValue.Centimeters
                 };
 
                 Console.WriteLine($"Date/Time: {condition.LoggedAt} UTC");
