@@ -9,7 +9,7 @@ using daedalus.Server.Database;
 namespace daedalus.Server.Migrations
 {
     [DbContext(typeof(daedalusDBContext))]
-    [Migration("20210413201628_InitialCreate")]
+    [Migration("20210418152815_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,7 +18,7 @@ namespace daedalus.Server.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.5");
 
-            modelBuilder.Entity("daedalus.Server.Database.LoggedCondition", b =>
+            modelBuilder.Entity("daedalus.Server.Database.Condition", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");

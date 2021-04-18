@@ -4,7 +4,7 @@ using System.Text;
 
 namespace daedalus.Server.Database
 {
-    public class LoggedCondition
+    public class Condition
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public DateTime LoggedAt { get; set; }

@@ -4,12 +4,15 @@ using System.Text;
 
 namespace daedalus.Shared.Model
 {
-    public class JwtEncodedCondition
+    /// <summary>
+    /// "Conditions" meaning this JWT could contain multiple conditions.
+    /// </summary>
+    public class CondtionsAsJwt
     {
-        public string Content { get; set; }
+        public string JWT { get; set; }
     }
 
-    public class LoggedCondition
+    public class Condition
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public DateTime LoggedAt { get; set; }

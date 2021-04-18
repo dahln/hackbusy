@@ -13,7 +13,7 @@ namespace daedalus.Server.Database
         {
         }
 
-        public DbSet<LoggedCondition> Conditions { get; set; }
+        public DbSet<Condition> Conditions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

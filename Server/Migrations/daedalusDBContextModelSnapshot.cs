@@ -16,7 +16,7 @@ namespace daedalus.Server.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.5");
 
-            modelBuilder.Entity("daedalus.Server.Database.LoggedCondition", b =>
+            modelBuilder.Entity("daedalus.Server.Database.Condition", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
