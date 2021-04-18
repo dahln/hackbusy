@@ -4,6 +4,8 @@
 
 @inject daedalus.Client.Services.API API
 
+<input type="button" class="btn btn-primary" value="Refresh" @onclick="Refresh" />
+
 <table class="table table-hover">
     <thead>
         <tr>
@@ -34,6 +36,14 @@
     private List<Condition> conditions { get; set; } = new List<Condition>();
 
     protected override async Task OnParametersSetAsync()
+    {
+        long end = DateTime.UtcNow.Ticks;
+        long start = DateTime.UtcNow.AddHours(-4).Ticks;
+
+        conditions = await API.SearchConditions(start, end);
+    }
+
+    async public Task Refresh()
     {
         long end = DateTime.UtcNow.Ticks;
         long start = DateTime.UtcNow.AddHours(-4).Ticks;
