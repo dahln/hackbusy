@@ -20,11 +20,11 @@
         @foreach (var condition in conditions)
         {
             <tr>
-                <td>@condition.LoggedAt</td>
-                <td>@condition.DegreesCelsius</td>
-                <td>@condition.HumidityPercentage</td>
-                <td>@condition.PressureMillibars</td>
-                <td>@condition.AltitudeCentimeters</td>
+                <td>@condition.LoggedAt.ToLocalTime()</td>
+                <td>@condition.DegreesCelsius C</td>
+                <td>@condition.HumidityPercentage%</td>
+                <td>@condition.PressureMillibars millibars</td>
+                <td>@condition.AltitudeCentimeters cm</td>
             </tr>
         }
     </tbody>
