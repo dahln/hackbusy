@@ -43,16 +43,16 @@ namespace daedalus.Server.Controllers
             return Ok();
         }
 
-        [Route("api/v1/condition/clear")]
-        [HttpGet]
-        async public Task<IActionResult> Clear() 
-        {
-            var allConditions = _db.Conditions.Where(c => c.Id != null);
-            _db.Conditions.RemoveRange(allConditions);
-            await _db.SaveChangesAsync();
+        // [Route("api/v1/condition/clear")]
+        // [HttpGet]
+        // async public Task<IActionResult> Clear() 
+        // {
+        //     var allConditions = _db.Conditions.Where(c => c.Id != null);
+        //     _db.Conditions.RemoveRange(allConditions);
+        //     await _db.SaveChangesAsync();
 
-            return Ok("Cleared");
-        }
+        //     return Ok("Cleared");
+        // }
 
         [Route("api/v1/condition/search/{start}/{end}")]
         [HttpGet]
