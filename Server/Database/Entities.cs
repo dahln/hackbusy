@@ -11,6 +11,5 @@ namespace daedalus.Server.Database
         public double DegreesCelsius { get; set; }
         public double PressureMillibars { get; set; }
         public double HumidityPercentage { get; set; }
-        public double AltitudeCentimeters { get; set; }
     }
 }

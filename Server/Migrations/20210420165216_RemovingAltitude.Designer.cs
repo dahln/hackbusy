@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using daedalus.Server.Database;
 
 namespace daedalus.Server.Migrations
 {
     [DbContext(typeof(daedalusDBContext))]
-    partial class daedalusDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210420165216_RemovingAltitude")]
+    partial class RemovingAltitude
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

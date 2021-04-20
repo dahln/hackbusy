@@ -11,7 +11,6 @@ namespace daedalus.Server.Utility
                 Id = model.Id,
                 LoggedAt = model.LoggedAt,
                 DegreesCelsius = model.DegreesCelsius,
-                AltitudeCentimeters = model.AltitudeCentimeters,
                 HumidityPercentage = model.HumidityPercentage,
                 PressureMillibars = model.PressureMillibars
             };
@@ -26,7 +25,6 @@ namespace daedalus.Server.Utility
                 Id = model.Id,
                 LoggedAt = model.LoggedAt,
                 DegreesCelsius = model.DegreesCelsius,
-                AltitudeCentimeters = model.AltitudeCentimeters,
                 HumidityPercentage = model.HumidityPercentage,
                 PressureMillibars = model.PressureMillibars
             };

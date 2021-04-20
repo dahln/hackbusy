@@ -52,7 +52,6 @@ namespace daedalus.iot
                     DegreesCelsius = tempValue.DegreesCelsius,
                     PressureMillibars = preValue.Millibars,
                     HumidityPercentage = humValue.Percent,
-                    AltitudeCentimeters = altValue.Centimeters
                 };
 
                 //Prepare Condition JWT

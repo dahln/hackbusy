@@ -29,7 +29,6 @@ namespace daedalus.Server.Utility
                     {
                         LoggedAt = condition.Value.LoggedAt,
                         DegreesCelsius = condition.Value.DegreesCelsius,
-                        AltitudeCentimeters = condition.Value.AltitudeCentimeters,
                         HumidityPercentage = condition.Value.HumidityPercentage,
                         PressureMillibars = condition.Value.PressureMillibars
                     };
