@@ -17,10 +17,11 @@ The '&' makes it run in the background
 
 OR Create a background service:
 
-Create file:
+Create file and add content:
 sudo nano /etc/systemd/system/daedalus.service
 
-
+<pre>
+<code>
 [Unit]
 Description=daedalus iot process
 
@@ -37,6 +38,8 @@ User=pi
 [Install]
 WantedBy=multi-user.target
 
+</pre>
+</code>
 
 
 
