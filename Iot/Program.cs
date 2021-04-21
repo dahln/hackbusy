@@ -49,9 +49,9 @@ namespace daedalus.iot
                 var condition = new Shared.Model.Condition()
                 {
                     LoggedAt = DateTime.UtcNow,
-                    DegreesCelsius = tempValue.DegreesCelsius,
-                    PressureMillibars = preValue.Millibars,
-                    HumidityPercentage = humValue.Percent,
+                    DegreesCelsius = Math.Round(tempValue.DegreesCelsius, 1),
+                    PressureMillibars = Math.Round(preValue.Millibars, 1),
+                    HumidityPercentage = Math.Round(humValue.Percent, 1)
                 };
 
                 //Prepare Condition JWT
