@@ -1,4 +1,4 @@
-# pi
+# daedalus
 
 https://docs.microsoft.com/en-us/dotnet/iot/
 
@@ -15,9 +15,11 @@ dotnet daedalus.iot.dll &
 
 The '&' makes it run in the background
 
-OR Create a background service:
+#### OR 
+Create a background service:
 
 Create file and add content:
+
 sudo nano /etc/systemd/system/daedalus.service
 
 <pre>
