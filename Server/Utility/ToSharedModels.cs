@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace daedalus.Server.Utility
 {
@@ -28,6 +29,11 @@ namespace daedalus.Server.Utility
                 HumidityPercentage = model.HumidityPercentage,
                 PressureMillibars = model.PressureMillibars
             };
+            
+            if(string.IsNullOrEmpty(condition.Id))
+            {
+                condition.Id = Guid.NewGuid().ToString();
+            }
 
             return condition;
         }

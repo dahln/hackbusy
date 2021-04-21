@@ -70,6 +70,8 @@ namespace daedalus.iot
                 var stringContent = new StringContent(JsonConvert.SerializeObject(conditionsAsJWT), Encoding.UTF8, "application/json");
                 var response = await client.PostAsync("/api/v1/condition", stringContent);
 
+                //var responseMessage = await response.Content.ReadAsStringAsync();
+
                 //Thread.Sleep(1000); //This works, but it is more often than I need
                 Thread.Sleep(60000); //New reading every 1 minute
             }
