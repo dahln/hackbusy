@@ -4,26 +4,27 @@
 
 @inject daedalus.Client.Services.API API
 
-
-<div class="row mt-5">
-    <div class="col-md-2">
-        <select class="form-control" @bind="ReportPeriod">
-            <option value="@PeriodType.Today">@PeriodType.Today.GetDescription()</option>
-            <option value="@PeriodType.Yesterday">@PeriodType.Yesterday.GetDescription()</option>
-            <option value="@PeriodType.LastSeven">@PeriodType.LastSeven.GetDescription()</option>
-            <option value="@PeriodType.CurrentMonth">@PeriodType.CurrentMonth.GetDescription()</option>
-            <option value="@PeriodType.PreviousMonth">@PeriodType.PreviousMonth.GetDescription()</option>
-            <option value="@PeriodType.CurrentYear">@PeriodType.CurrentYear.GetDescription()</option>
-            <option value="@PeriodType.PreviousYear">@PeriodType.PreviousYear.GetDescription()</option>
-        </select>
-    </div>
-    <div class="col-md-2">
-        <input type="button" class="btn btn-success" value="Search" @onclick="() => SearchConditions(0)" />
+<div class="row mt-4">
+    <div class="col-lg-3">
+        <div class="input-group">
+            <select class="form-control" @bind="ReportPeriod">
+                <option value="@PeriodType.Today">@PeriodType.Today.GetDescription()</option>
+                <option value="@PeriodType.Yesterday">@PeriodType.Yesterday.GetDescription()</option>
+                <option value="@PeriodType.LastSeven">@PeriodType.LastSeven.GetDescription()</option>
+                <option value="@PeriodType.CurrentMonth">@PeriodType.CurrentMonth.GetDescription()</option>
+                <option value="@PeriodType.PreviousMonth">@PeriodType.PreviousMonth.GetDescription()</option>
+                <option value="@PeriodType.CurrentYear">@PeriodType.CurrentYear.GetDescription()</option>
+                <option value="@PeriodType.PreviousYear">@PeriodType.PreviousYear.GetDescription()</option>
+            </select>
+            <div class="input-group-append">
+                <button class="btn btn-success" type="button" @onclick="() => SearchConditions(0)">Run</button>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="row mt-5">
-    <div class="col-md-3">
+<div class="row mt-3">
+    <div class="col-lg-3 mt-2">
         <div class="card">
             <h5 class="card-header">
                 <i class="fas fa-temperature-high"></i> Temperature 
@@ -35,7 +36,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-lg-3 mt-2">
         <div class="card">
             <h5 class="card-header">
                 <i class="fas fa-umbrella"></i> Humidity
@@ -47,7 +48,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-lg-3 mt-2">
         <div class="card">
             <h5 class="card-header">
                 <i class="fas fa-wind"></i> Pressure
@@ -62,7 +63,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-lg-12">
         <nav aria-label="Page navigation example">
             <ul class="pagination float-right">
                 @if ((Page + 1) > 1)
@@ -79,7 +80,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12 table-responsive">
+    <div class="col-lg-12 table-responsive">
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -104,7 +105,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-lg-12">
         <nav aria-label="Page navigation example">
             <ul class="pagination float-right">
                 @if ((Page + 1) > 1)
