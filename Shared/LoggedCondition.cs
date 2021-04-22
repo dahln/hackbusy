@@ -20,4 +20,22 @@ namespace daedalus.Shared.Model
         public double PressureMillibars { get; set; }
         public double HumidityPercentage { get; set; }
     }
+
+    public class ConditionSearchResponse
+    {
+        public List<Condition> Data { get; set; } = new List<Condition>();
+        public int Total { get; set; }
+
+        public double LowTemperature { get; set; }
+        public double HighTemperature { get; set; }
+        public double AverageTemperature { get; set; }
+
+        public double LowHumidity { get; set; }
+        public double HighHumidity { get; set; }
+        public double AverageHumidity { get; set; }
+
+        public double LowPressure { get; set; }
+        public double HighPressure { get; set; }
+        public double AveragePressure { get; set; }
+    }
 }

@@ -54,19 +54,36 @@ namespace daedalus.Server.Controllers
         //     return Ok("Cleared");
         // }
 
-        [Route("api/v1/condition/search/{start}/{end}")]
+        [Route("api/v1/condition/search/{start}/{end}/{page}/{size}")]
         [HttpGet]
-        async public Task<IActionResult> SearchCondition(long start, long end) 
+        async public Task<IActionResult> SearchCondition(long start, long end, int page, int size) 
         {
             DateTime startFilter = new DateTime(start);
             DateTime endFilter = new DateTime(end);
 
-            var results = await _db.Conditions.Where(c => c.LoggedAt >= startFilter && c.LoggedAt < endFilter).ToListAsync();
+            var query = _db.Conditions.Where(c => c.LoggedAt >= startFilter && c.LoggedAt < endFilter);
 
-            List<Shared.Model.Condition> response = new List<Shared.Model.Condition>();
+            var response = new Shared.Model.ConditionSearchResponse();
 
-            if (results.Any())
-                response = results.Select(r => r.ToSharedCondition()).OrderByDescending(r => r.LoggedAt).ToList();
+            var anyResults = await query.AnyAsync();
+            if (!anyResults)
+                return Ok(response);
+
+            response.HighTemperature = await query.MaxAsync(s => s.DegreesCelsius);
+            response.LowTemperature = await query.MinAsync(s => s.DegreesCelsius);
+            response.AverageTemperature = await query.AverageAsync(s => s.DegreesCelsius);
+            response.HighHumidity = await query.MaxAsync(s => s.HumidityPercentage);
+            response.LowHumidity = await query.MinAsync(s => s.HumidityPercentage);
+            response.AverageHumidity = await query.AverageAsync(s => s.HumidityPercentage);
+            response.HighPressure = await query.MaxAsync(s => s.PressureMillibars);
+            response.LowPressure = await query.MinAsync(s => s.PressureMillibars);
+            response.AveragePressure = await query.AverageAsync(s => s.PressureMillibars);
+
+            response.Total = await query.CountAsync();
+
+            response.Data = await query.OrderByDescending(r => r.LoggedAt)
+                                                            .Skip(page * size).Take(size)
+                                                            .Select(r => r.ToSharedCondition()).ToListAsync();
 
             return Ok(response);
         }

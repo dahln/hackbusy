@@ -28,9 +28,9 @@ namespace daedalus.Client.Services
             _spinnerService = spinnerService;
         }
         
-        async public Task<List<Condition>> SearchConditions(long start, long end)
+        async public Task<ConditionSearchResponse> SearchConditions(long start, long end, int page, int size)
         {
-            return await GetAsync<List<Condition>>($"api/v1/condition/search/{start}/{end}");
+            return await GetAsync<ConditionSearchResponse>($"api/v1/condition/search/{start}/{end}/{page}/{size}");
         }
 
         #region HTTP Methods
