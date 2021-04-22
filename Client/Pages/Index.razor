@@ -5,12 +5,17 @@
 @inject daedalus.Client.Services.API API
 
 
-<div class="row">
+<div class="row mt-5">
     <div class="col-md-2">
-        <input type="datetime-local" @bind="Start" class="form-control" />
-    </div>
-    <div class="col-md-2">
-        <input type="datetime-local" @bind="End" class="form-control" />
+        <select class="form-control" @bind="ReportPeriod">
+            <option value="@PeriodType.Today">@PeriodType.Today.GetDescription()</option>
+            <option value="@PeriodType.Yesterday">@PeriodType.Yesterday.GetDescription()</option>
+            <option value="@PeriodType.LastSeven">@PeriodType.LastSeven.GetDescription()</option>
+            <option value="@PeriodType.CurrentMonth">@PeriodType.CurrentMonth.GetDescription()</option>
+            <option value="@PeriodType.PreviousMonth">@PeriodType.PreviousMonth.GetDescription()</option>
+            <option value="@PeriodType.CurrentYear">@PeriodType.CurrentYear.GetDescription()</option>
+            <option value="@PeriodType.PreviousYear">@PeriodType.PreviousYear.GetDescription()</option>
+        </select>
     </div>
     <div class="col-md-2">
         <input type="button" class="btn btn-success" value="Search" @onclick="() => SearchConditions(0)" />
@@ -118,22 +123,32 @@
 
 @code {
 
-    private int Size { get; set; } = 10;
-    private int Page { get; set; }
-    private DateTime Start { get; set; } = DateTime.UtcNow.AddHours(-4).ToLocalTime();
-    private DateTime End { get; set; } = DateTime.UtcNow.ToLocalTime();
-    private ConditionSearchResponse results { get; set; } = new ConditionSearchResponse();
+        private int Size { get; set; } = 10;
+        private int Page { get; set; }
+        private DateTime Start { get; set; } = DateTime.UtcNow.AddHours(-4).ToLocalTime();
+        private DateTime End { get; set; } = DateTime.UtcNow.ToLocalTime();
+        private ConditionSearchResponse results { get; set; } = new ConditionSearchResponse();
+        private List<Period> Periods { get; set; } = new List<Period>();
+        private PeriodType ReportPeriod { get; set; } = PeriodType.Today;
 
-    protected override async Task OnParametersSetAsync()
-    {
-        await SearchConditions(0);
-    }
+        protected override async Task OnParametersSetAsync()
+        {
+            Periods = Reporting.GetReportPeriods();
 
-    async public Task SearchConditions(int page)
-    {
-        Page = page;
-        results = await API.SearchConditions(Start.Ticks, End.Ticks, Page, Size);
-    }
+            await SearchConditions(0);
+        }
 
+        async public Task SearchConditions(int page)
+        {
+            var selectedPeriod = Periods.Where(p => p.PeriodType == ReportPeriod).FirstOrDefault();
+            Start = selectedPeriod.Start;
+            End = selectedPeriod.End;
+
+            Console.WriteLine(Start);
+            Console.WriteLine(End);
+
+            Page = page;
+            results = await API.SearchConditions(Start.Ticks, End.Ticks, Page, Size);
+        }
 }
 
