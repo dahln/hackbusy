@@ -4,49 +4,135 @@
 
 @inject daedalus.Client.Services.API API
 
-<input type="button" class="btn btn-primary" value="Refresh" @onclick="Refresh" />
 
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Logged At</th>
-            <th>Temperature</th>
-            <th>Humidity</th>
-            <th>Pressure</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var condition in conditions)
-        {
-            <tr>
-                <td>@condition.LoggedAt.ToLocalTime()</td>
-                <td>@condition.DegreesCelsius C</td>
-                <td>@condition.HumidityPercentage%</td>
-                <td>@condition.PressureMillibars millibars</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-md-2">
+        <input type="datetime-local" @bind="Start" class="form-control" />
+    </div>
+    <div class="col-md-2">
+        <input type="datetime-local" @bind="End" class="form-control" />
+    </div>
+    <div class="col-md-2">
+        <input type="button" class="btn btn-success" value="Search" @onclick="() => SearchConditions(0)" />
+    </div>
+</div>
 
+<div class="row mt-5">
+    <div class="col-md-3">
+        <div class="card">
+            <h5 class="card-header">
+                <i class="fas fa-temperature-high"></i> Temperature 
+            </h5>
+            <div class="card-body">
+                <h6 class="card-title">Low: <span class="low">@(Math.Round(results.LowTemperature, 2).ToString("0.00")) &deg;</span></h6>
+                <h6 class="card-title">Average: <span class="average">@(Math.Round(results.AverageTemperature, 2).ToString("0.00")) &deg;</span></h6>
+                <h6 class="card-title">High: <span class="high">@(Math.Round(results.HighTemperature, 2).ToString("0.00")) &deg;</span></h6>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <h5 class="card-header">
+                <i class="fas fa-umbrella"></i> Humidity
+            </h5>
+            <div class="card-body">
+                <h6 class="card-title">Low: <span class="low">@(Math.Round(results.LowHumidity, 2).ToString("0.00")) %</span></h6>
+                <h6 class="card-title">Average: <span class="average">@(Math.Round(results.AverageHumidity, 2).ToString("0.00")) %</span></h6>
+                <h6 class="card-title">High: <span class="high">@(Math.Round(results.HighHumidity, 2).ToString("0.00")) %</span></h6>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <h5 class="card-header">
+                <i class="fas fa-wind"></i> Pressure
+            </h5>
+            <div class="card-body">
+                <h6 class="card-title">Low: <span class="low">@(Math.Round(results.LowPressure, 2).ToString("0.00")) mbar</span></h6>
+                <h6 class="card-title">Average: <span class="average">@(Math.Round(results.AveragePressure, 2).ToString("0.00")) mbar</span></h6>
+                <h6 class="card-title">High: <span class="high">@(Math.Round(results.HighPressure, 2).ToString("0.00")) mbar</span></h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination float-right">
+                @if ((Page + 1) > 1)
+                {
+                    <li class="page-item pointer"><div class="page-link" @onclick="(() => SearchConditions(Page - 1))">Previous</div></li>
+                }
+                <li class="page-item"><div class="page-link">Page @(results.Total == 0 ? 0 : (Page + 1)) of @(Math.Ceiling((double)results.Total / Size))</div></li>
+                @if ((Page + 1) < (Math.Ceiling((double)results.Total / Size)))
+                {
+                    <li class="page-item pointer"><div class="page-link" @onclick="(() => SearchConditions(Page + 1))">Next</div></li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Logged At</th>
+                    <th>Temperature</th>
+                    <th>Humidity</th>
+                    <th>Pressure</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var condition in results.Data)
+                {
+                    <tr>
+                        <td>@condition.LoggedAt.ToLocalTime()</td>
+                        <td>@(Math.Round(condition.DegreesCelsius, 2).ToString("0.00")) &deg;C</td>
+                        <td>@(Math.Round(condition.HumidityPercentage, 2).ToString("0.00")) %</td>
+                        <td>@(Math.Round(condition.PressureMillibars, 2).ToString("0.00")) mbar</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination float-right">
+                @if ((Page + 1) > 1)
+                {
+                    <li class="page-item pointer"><div class="page-link" @onclick="(() => SearchConditions(Page - 1))">Previous</div></li>
+                }
+                <li class="page-item"><div class="page-link">Page @(results.Total == 0 ? 0 : (Page + 1)) of @(Math.Ceiling((double)results.Total / Size))</div></li>
+                @if ((Page + 1) < (Math.Ceiling((double)results.Total / Size)))
+                {
+                    <li class="page-item pointer"><div class="page-link" @onclick="(() => SearchConditions(Page + 1))">Next</div></li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
 
 @code {
 
-    private List<Condition> conditions { get; set; } = new List<Condition>();
+    private int Size { get; set; } = 10;
+    private int Page { get; set; }
+    private DateTime Start { get; set; } = DateTime.UtcNow.AddHours(-4).ToLocalTime();
+    private DateTime End { get; set; } = DateTime.UtcNow.ToLocalTime();
+    private ConditionSearchResponse results { get; set; } = new ConditionSearchResponse();
 
     protected override async Task OnParametersSetAsync()
     {
-        long end = DateTime.UtcNow.Ticks;
-        long start = DateTime.UtcNow.AddHours(-4).Ticks;
-
-        conditions = await API.SearchConditions(start, end);
+        await SearchConditions(0);
     }
 
-    async public Task Refresh()
+    async public Task SearchConditions(int page)
     {
-        long end = DateTime.UtcNow.Ticks;
-        long start = DateTime.UtcNow.AddHours(-4).Ticks;
-
-        conditions = await API.SearchConditions(start, end);
+        Page = page;
+        results = await API.SearchConditions(Start.Ticks, End.Ticks, Page, Size);
     }
 
 }
