@@ -11,9 +11,8 @@ using Blazored.Toast;
 using Blazored.LocalStorage;
 using Blazored.Modal;
 using BlazorSpinner;
-using daedalus.Client.Services;
 
-namespace daedalus.Client
+namespace dice
 {
     public class Program
     {
@@ -22,12 +21,6 @@ namespace daedalus.Client
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddHttpClient("daedalus.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
-            // Supply HttpClient instances that include access tokens when making requests to the server project
-            builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("daedalus.ServerAPI"));
-
-            builder.Services.AddScoped<API>();
-            builder.Services.AddScoped<AppState>();
             builder.Services.AddScoped<SpinnerService>();
 
             builder.Services.AddBlazoredLocalStorage();
