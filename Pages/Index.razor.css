@@ -13,3 +13,17 @@
 .high {
     color: orangered;
 }
+
+.dice-label {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.dice-result-label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.dice-result {
+    font-size: 24px;
+}
