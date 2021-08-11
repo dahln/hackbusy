@@ -8,24 +8,96 @@
             <label class="mx-auto dice-label">D20</label>
         </div>
         <div class="row">
-            <i class="fas fa-dice-d20 fa-4x mx-auto"></i>
+            <i class="bi bi-hexagon-fill mx-auto dice-shape"></i>
         </div>
         <div class="row mt-3">
             <div class="mx-auto">
                 <input type="button" value="Roll & Sum" class="btn btn-outline-success btn-lg" />
-                <input type="button" value="Roll" class="btn btn-success btn-lg" />
+                <input type="button" value="Roll" class="btn btn-success btn-lg" @onclick="()=>Roll(20)" />
             </div>
         </div>
         <div class="row mt-3">
-            <label class="mx-auto dice-result-label">1 + 3 + 5 = <span class="badge badge-pill badge-primary p-3 dice-result">8</span></label>
+            <label class="mx-auto dice-result-label"><span class="badge badge-pill badge-primary p-3 dice-result">@resultD20</span></label>
         </div>
     </div>
+    <div class="col-sm-6">
+        <div class="row">
+            <label class="mx-auto dice-label">D12</label>
+        </div>
+        <div class="row">
+            <i class="bi bi-pentagon-fill mx-auto dice-shape"></i>
+        </div>
+        <div class="row mt-3">
+            <div class="mx-auto">
+                <input type="button" value="Roll & Sum" class="btn btn-outline-success btn-lg" />
+                <input type="button" value="Roll" class="btn btn-success btn-lg" @onclick="()=>Roll(12)" />
+            </div>
+        </div>
+        <div class="row mt-3">
+            <label class="mx-auto dice-result-label"><span class="badge badge-pill badge-primary p-3 dice-result">@resultD12</span></label>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="row">
+            <label class="mx-auto dice-label">D10</label>
+        </div>
+        <div class="row">
+            <i class="bi bi-diamond-fill mx-auto dice-shape"></i>
+        </div>
+        <div class="row mt-3">
+            <div class="mx-auto">
+                <input type="button" value="Roll & Sum" class="btn btn-outline-success btn-lg" />
+                <input type="button" value="Roll" class="btn btn-success btn-lg" @onclick="()=>Roll(10)" />
+            </div>
+        </div>
+        <div class="row mt-3">
+            <label class="mx-auto dice-result-label"><span class="badge badge-pill badge-primary p-3 dice-result">@resultD10</span></label>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="row">
+            <label class="mx-auto dice-label">D8</label>
+        </div>
+        <div class="row">
+            <i class="bi bi-diamond-fill mx-auto dice-shape"></i>
+        </div>
+        <div class="row mt-3">
+            <div class="mx-auto">
+                <input type="button" value="Roll & Sum" class="btn btn-outline-success btn-lg" />
+                <input type="button" value="Roll" class="btn btn-success btn-lg" @onclick="()=>Roll(6)" />
+            </div>
+        </div>
+        <div class="row mt-3">
+            <label class="mx-auto dice-result-label"><span class="badge badge-pill badge-primary p-3 dice-result">@resultD6</span></label>
+        </div>
+    </div>
+</div>
+<div class="row">
     <div class="col-sm-6">
         <div class="row">
             <label class="mx-auto dice-label">D6</label>
         </div>
         <div class="row">
-            <i class="fas fa-dice-d6 fa-4x mx-auto"></i>
+            <i class="bi bi-square-fill mx-auto dice-shape"></i>
+        </div>
+        <div class="row mt-3">
+            <div class="mx-auto">
+                <input type="button" value="Roll & Sum" class="btn btn-outline-success btn-lg" />
+                <input type="button" value="Roll" class="btn btn-success btn-lg" @onclick="()=>Roll(10)" />
+            </div>
+        </div>
+        <div class="row mt-3">
+            <label class="mx-auto dice-result-label"><span class="badge badge-pill badge-primary p-3 dice-result">@resultD10</span></label>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="row">
+            <label class="mx-auto dice-label">D4</label>
+        </div>
+        <div class="row">
+            <i class="bi bi-triangle-fill mx-auto dice-shape"></i>
         </div>
         <div class="row mt-3">
             <div class="mx-auto">
@@ -42,10 +114,18 @@
 @code {
 
     private List<int> rollHistoryD20 { get; set; } = new List<int>();
+    private List<int> rollHistoryD12 { get; set; } = new List<int>();
+    private List<int> rollHistoryD10 { get; set; } = new List<int>();
+    private List<int> rollHistoryD8 { get; set; } = new List<int>();
     private List<int> rollHistoryD6 { get; set; } = new List<int>();
+    private List<int> rollHistoryD4 { get; set; } = new List<int>();
 
     public int? resultD20 { get; set; }
+    public int? resultD12 { get; set; }
+    public int? resultD10 { get; set; }
+    public int? resultD8 { get; set; }
     public int? resultD6 { get; set; }
+    public int? resultD4 { get; set; }
 
     public void Roll(int size)
     {
