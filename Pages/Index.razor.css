@@ -13,3 +13,9 @@
 .high {
     color: orangered;
 }
+
+.dice-column {
+    left: 50%;
+    
+    transform: translate(-130px);
+}

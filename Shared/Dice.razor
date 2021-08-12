@@ -1,19 +1,10 @@
-﻿@using System
+﻿<div class="dice-wrapper">
+    <label class="dice-label">@Name</label>
 
-<div class="row">
-    <label class="mx-auto dice-label">@Name</label>
-</div>
-<div class="row">
-    <i class="bi @Shape mx-auto dice-shape"></i>
-</div>
-<div class="row mt-3">
-    <div class="mx-auto">
-        <input type="button" value="Roll & Sum" class="btn btn-outline-success btn-lg" />
-        <input type="button" value="Roll" class="btn btn-success btn-lg" @onclick="()=>Roll(20)" />
-    </div>
-</div>
-<div class="row mt-3">
-    <label class="mx-auto dice-result-label"><span class="badge badge-pill badge-primary p-3 dice-result">@_result</span></label>
+    <i class="bi @Shape @_spin dice-shape"></i>
+    <label class="dice-shape-label @(_result >= 10 ? "dice-shape-label-double" : "dice-shape-label-single")">@_result</label>
+
+    <input type="button" value="Roll" class="btn btn-success btn-lg btn-roll" @onclick="()=>Roll(20)" disabled="@(string.IsNullOrEmpty(_spin) == false)" />
 </div>
 
 @code {
@@ -27,13 +18,20 @@
     [Parameter]
     public int Size { get; set; }
 
+    private string _spin  { get; set; }
     private List<int> _history { get; set; } = new List<int>();
     private int? _result { get; set; }
     private Random rand { get; set; } = new Random();
 
-    private void Roll(int maximum)
+    async private Task Roll(int maximum)
     {
+        _result = null;
+        _spin = "dice-spin";
+        StateHasChanged();
+        await Task.Delay(400);
         _result = rand.Next(1, Size+1);
+
+        _spin = "";
     }
 
     private void RollSum(int maximum)
