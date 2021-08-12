@@ -41,12 +41,18 @@
 
 }
 .dice-shape-label-single {
-    margin-left: 97px;
+    margin-left: 98px;
 }
 
 
 .btn-roll {
     position: absolute;
     margin-left: 160px;
+    margin-top: 30px;
+}
+
+.btn-total {
+    position: absolute;
+    margin-left: 237px;
     margin-top: 30px;
 }

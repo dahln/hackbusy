@@ -4,7 +4,11 @@
     <i class="bi @Shape @_spin dice-shape"></i>
     <label class="dice-shape-label @(_result >= 10 ? "dice-shape-label-double" : "dice-shape-label-single")">@_result</label>
 
-    <input type="button" value="Roll" class="btn btn-success btn-lg btn-roll" @onclick="()=>Roll(20)" disabled="@(string.IsNullOrEmpty(_spin) == false)" />
+    <input type="button" value="Roll" class="btn btn-primary btn-lg btn-roll" @onclick="()=>Roll(20)" disabled="@(string.IsNullOrEmpty(_spin) == false)" />
+    @if(_history.Count > 1)
+    {
+        <input type="button" value="@(_history.Sum())" class="btn btn-outline-warning btn-lg btn-total" @onclick="Reset" disabled="@(string.IsNullOrEmpty(_spin) == false)" />
+    }
 </div>
 
 @code {
@@ -30,13 +34,14 @@
         StateHasChanged();
         await Task.Delay(400);
         _result = rand.Next(1, Size+1);
+        _history.Add(_result.Value);
 
         _spin = "";
     }
 
-    private void RollSum(int maximum)
+    private void Reset()
     {
-
+        _history = new List<int>();
     }
 
 }
