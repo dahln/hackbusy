@@ -1,0 +1,44 @@
+﻿@using System
+
+<div class="row">
+    <label class="mx-auto dice-label">@Name</label>
+</div>
+<div class="row">
+    <i class="bi @Shape mx-auto dice-shape"></i>
+</div>
+<div class="row mt-3">
+    <div class="mx-auto">
+        <input type="button" value="Roll & Sum" class="btn btn-outline-success btn-lg" />
+        <input type="button" value="Roll" class="btn btn-success btn-lg" @onclick="()=>Roll(20)" />
+    </div>
+</div>
+<div class="row mt-3">
+    <label class="mx-auto dice-result-label"><span class="badge badge-pill badge-primary p-3 dice-result">@_result</span></label>
+</div>
+
+@code {
+
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public string Shape { get; set; }
+
+    [Parameter]
+    public int Size { get; set; }
+
+    private List<int> _history { get; set; } = new List<int>();
+    private int? _result { get; set; }
+    private Random rand { get; set; } = new Random();
+
+    private void Roll(int maximum)
+    {
+        _result = rand.Next(1, Size+1);
+    }
+
+    private void RollSum(int maximum)
+    {
+
+    }
+
+}
