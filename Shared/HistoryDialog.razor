@@ -1,0 +1,38 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        @* <textarea readonly></textarea> *@
+        <strong>@History.Sum() = </strong>
+        <div class="history">@string.Join(" + ", History)</div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-12">
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                <input type="button" class="btn btn-warning dialog-btn" value="Reset" @onclick="Confirm" />
+            </li>
+            <li class="list-inline-item">
+                <input type="button" class="btn btn-outline-primary dialog-btn" value="Close" @onclick="Cancel" />
+            </li>
+        </ul>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter] 
+    BlazoredModalInstance BlazoredModal { get; set; }
+
+    [Parameter]
+    public List<int> History { get; set; } = new List<int>();
+
+    public void Confirm()
+    {
+        BlazoredModal.CloseAsync(ModalResult.Ok(string.Empty));
+    }
+
+    public void Cancel()
+    {
+        BlazoredModal.CancelAsync();
+    }
+}

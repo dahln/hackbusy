@@ -1,0 +1,11 @@
+﻿.dialog-btn {
+    width: 110px;
+}
+
+.blazored-toast-container {
+    z-index: 10000;
+}
+
+.history {
+    inline-size: 280px;
+}

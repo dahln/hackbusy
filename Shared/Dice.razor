@@ -1,15 +1,4 @@
-﻿<!-- <div class="dice-wrapper">
-    <label class="dice-label">@Name</label>
-
-    <i class="bi @Shape @_spin dice-shape"></i>
-    <label class="dice-shape-label @(_result >= 10 ? "dice-shape-label-double" : "dice-shape-label-single")">@_result</label>
-
-    <input type="button" value="Roll" class="btn btn-primary btn-lg btn-roll" @onclick="()=>Roll(20)" disabled="@(string.IsNullOrEmpty(_spin) == false)" />
-    @if(_history.Count > 1)
-    {
-        <input type="button" value="@(_history.Sum())" class="btn btn-outline-warning btn-lg btn-total" @onclick="Reset" disabled="@(string.IsNullOrEmpty(_spin) == false)" />
-    }
-</div> -->
+﻿@inject IModalService _modalService
 
 <tr class="dice-row">
     <td>
@@ -29,12 +18,11 @@
             <input type="button" class="btn btn-primary btn-roll" value="Roll" @onclick="()=>Roll(20)" disabled="@(string.IsNullOrEmpty(_spin) == false)" /> <br/>
     </td>
     <td class="nowrap">
-        <button class="btn btn-outline-info btn-reset"  @onclick="Reset" disabled="@(string.IsNullOrEmpty(_spin) == false)">
+        <button class="btn btn-outline-info btn-reset"  @onclick="History" disabled="@(string.IsNullOrEmpty(_spin) == false)">
             <span class="xCount">x@(_history.Count)</span>
             <br />
             <span class="xTotal">@(_history.Sum())</span>
         </button>
-        <span>=@string.Join("+",_history)</span>
     </td>
 </tr>
 
@@ -69,6 +57,24 @@
     private void Reset()
     {
         _history = new List<int>();
+    }
+
+    async private Task History()
+    {
+        if(_history.Count() > 1)
+        {
+            var parameters = new ModalParameters();
+            parameters.Add(nameof(HistoryDialog.History), _history);
+
+            var modal = _modalService.Show<HistoryDialog>($"Roll History & Sum of {Name}", parameters);
+            var modalResult = await modal.Result;
+
+            if (modalResult.Cancelled) { }
+            else
+            {
+                Reset();
+            }
+        }
     }
 
 }
