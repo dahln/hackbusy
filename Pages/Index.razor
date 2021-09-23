@@ -1,6 +1,19 @@
 ﻿@page "/"
 
-<div class="row">
+<div class="row mt-4">
+        <div class="col-md-12">
+                <table class="mx-auto">
+                        <Dice Name="D20" Shape="bi-hexagon-fill" Size="20" />
+                        <Dice Name="D12" Shape="bi-pentagon-fill" Size="12" />
+                        <Dice Name="D10" Shape="bi-diamond-fill" Size="10" />
+                        <Dice Name="D8" Shape="bi-diamond-fill" Size="8" />
+                        <Dice Name="D6" Shape="bi-square-fill" Size="6" />
+                        <Dice Name="D4" Shape="bi-triangle-fill" Size="4" />
+                </table>
+        </div>
+</div>
+
+@* <div class="row">
     <div class="col dice-column">
         <Dice Name="D20" Shape="bi-hexagon-fill" Size="20" />
     </div>
@@ -29,7 +42,7 @@
     <div class="col dice-column">
         <Dice Name="D4" Shape="bi-triangle-fill" Size="4" />
     </div>
-</div>
+</div> *@
 
 @code {
 

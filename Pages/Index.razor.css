@@ -2,20 +2,3 @@
     cursor: pointer;
 }
 
-.low {
-    color: steelblue;
-}
-
-.average {
-    color: green;
-}
-
-.high {
-    color: orangered;
-}
-
-.dice-column {
-    left: 50%;
-    
-    transform: translate(-130px);
-}

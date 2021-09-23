@@ -1,4 +1,4 @@
-﻿<div class="dice-wrapper">
+﻿<!-- <div class="dice-wrapper">
     <label class="dice-label">@Name</label>
 
     <i class="bi @Shape @_spin dice-shape"></i>
@@ -9,7 +9,32 @@
     {
         <input type="button" value="@(_history.Sum())" class="btn btn-outline-warning btn-lg btn-total" @onclick="Reset" disabled="@(string.IsNullOrEmpty(_spin) == false)" />
     }
-</div>
+</div> -->
+
+<tr class="dice-row">
+    <td>
+            <strong class="dice-label">@Name</strong>
+    </td>
+    <td>
+            <div class="container">
+                    <div class="container-shape @_spin">
+                            <i class="bi @Shape dice-shape"></i>
+                    </div>
+                    <div class="container-number">
+                            <strong class="dice-number @(_result >= 10 ? "dice-shape-label-double" : "dice-shape-label-single")">@_result</strong>
+                    </div>
+            </div>
+    </td>
+    <td>
+            <input type="button" class="btn btn-primary btn-roll" value="Roll" @onclick="()=>Roll(20)" disabled="@(string.IsNullOrEmpty(_spin) == false)" /> <br/>
+    </td>
+    <td>
+        @if(_history.Count > 1)
+        {
+            <input type="button" class="btn btn-outline-info btn-reset" value="@(_history.Sum())" @onclick="Reset" disabled="@(string.IsNullOrEmpty(_spin) == false)" />
+        }
+    </td>
+</tr>
 
 @code {
 

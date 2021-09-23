@@ -1,26 +1,57 @@
-﻿.dice-wrapper {
-    position: relative;
+﻿
+.btn-roll {
+    width: 70px;
+}
+.btn-reset {
+    width: 50px;
 }
 .dice-label {
     font-size: 24px;
-    font-weight: bold;
-    position: absolute;
-    margin-top: 35px;
 }
-
 .dice-shape {
-    /* font-size: 60px; */
     font-size: 70px;
+}
+.dice-number {
+    color: white;
+    font-size: 26px;
+}
+.dice-row {
+    height: 90px;
+}
+.container 
+{
+    position: relative;
+    width: 100px;
+    top: -55px;
+    left: 13px;
+}
+  
+.container-shape {
     position: absolute;
-    margin-left: 70px;
+    top: 0;
+    left: 0;
+}
+.container-number {
+    position: absolute;
+    top: 32px;
+    left: 19px;
+}
+
+.dice-shape-label-double {
+    margin-left: 1px;
 
 }
+.dice-shape-label-single {
+    margin-left: 10px;
+}
+
+
 @keyframes spin {
     from {
         transform:rotate(0deg);
     }
     to {
-        transform:rotate(360deg);
+        transform:rotate(720deg);
     }
 }
 
@@ -30,29 +61,3 @@
     animation-timing-function:cubic-bezier(); 
 }
 
-.dice-shape-label {
-    color: white;
-    font-size: 26px;
-    margin-top: 33px;
-    position: absolute;
-}
-.dice-shape-label-double {
-    margin-left: 90px;
-
-}
-.dice-shape-label-single {
-    margin-left: 98px;
-}
-
-
-.btn-roll {
-    position: absolute;
-    margin-left: 160px;
-    margin-top: 30px;
-}
-
-.btn-total {
-    position: absolute;
-    margin-left: 237px;
-    margin-top: 30px;
-}
