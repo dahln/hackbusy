@@ -28,11 +28,13 @@
     <td>
             <input type="button" class="btn btn-primary btn-roll" value="Roll" @onclick="()=>Roll(20)" disabled="@(string.IsNullOrEmpty(_spin) == false)" /> <br/>
     </td>
-    <td>
-        @if(_history.Count > 1)
-        {
-            <input type="button" class="btn btn-outline-info btn-reset" value="@(_history.Sum())" @onclick="Reset" disabled="@(string.IsNullOrEmpty(_spin) == false)" />
-        }
+    <td class="nowrap">
+        <button class="btn btn-outline-info btn-reset"  @onclick="Reset" disabled="@(string.IsNullOrEmpty(_spin) == false)">
+            <span class="xCount">x@(_history.Count)</span>
+            <br />
+            <span class="xTotal">@(_history.Sum())</span>
+        </button>
+        <span>=@string.Join("+",_history)</span>
     </td>
 </tr>
 

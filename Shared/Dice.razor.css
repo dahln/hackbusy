@@ -3,8 +3,23 @@
     width: 70px;
 }
 .btn-reset {
+    position: relative;
     width: 50px;
+    top: 0px;
+    left: 0px;
 }
+.xCount {
+    font-size: 8px;
+    position: absolute;
+    top: 0px;
+    left: 4px;
+}
+.xTotal {
+    position: absolute;
+    top: 6px;
+    left: 18px;
+}
+
 .dice-label {
     font-size: 24px;
 }
@@ -60,4 +75,9 @@
     animation-duration: 400ms;
     animation-timing-function:cubic-bezier(); 
 }
+
+.nowrap {
+    white-space: nowrap;
+}
+
 
