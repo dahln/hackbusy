@@ -21,13 +21,14 @@
 }
 
 .dice-label {
+    color: ivory;
     font-size: 24px;
 }
 .dice-shape {
     font-size: 70px;
 }
 .dice-number {
-    color: white;
+    color: ivory;
     font-size: 26px;
 }
 .dice-row {

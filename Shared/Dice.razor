@@ -2,12 +2,12 @@
 
 <tr class="dice-row">
     <td>
-            <strong class="dice-label">@Name</strong>
+            <span class="dice-label">@Name</span>
     </td>
     <td>
             <div class="container">
                     <div class="container-shape @_spin">
-                            <i class="bi @Shape dice-shape"></i>
+                            <i class="bi @Shape dice-shape" style="color: @Color"></i>
                     </div>
                     <div class="container-number">
                             <span class="dice-number @(_result >= 10 ? "dice-shape-label-double" : "dice-shape-label-single")">@_result</span>
@@ -15,7 +15,7 @@
             </div>
     </td>
     <td>
-            <input type="button" class="btn btn-primary btn-roll" value="Roll" @onclick="()=>Roll(20)" disabled="@(string.IsNullOrEmpty(_spin) == false)" /> <br/>
+            <input type="button" class="btn btn-info btn-roll" value="Roll" @onclick="()=>Roll(20)" disabled="@(string.IsNullOrEmpty(_spin) == false)" /> <br/>
     </td>
     <td class="nowrap">
         <button class="btn btn-outline-info btn-reset"  @onclick="History" disabled="@(string.IsNullOrEmpty(_spin) == false)">
@@ -36,6 +36,9 @@
 
     [Parameter]
     public int Size { get; set; }
+
+    [Parameter]
+    public string Color { get; set; }
 
     private string _spin  { get; set; }
     private List<int> _history { get; set; } = new List<int>();
