@@ -61,7 +61,7 @@
 
     async private Task History()
     {
-        if(_history.Count() > 1)
+        if(_history.Count() > 0)
         {
             var parameters = new ModalParameters();
             parameters.Add(nameof(HistoryDialog.History), _history);
