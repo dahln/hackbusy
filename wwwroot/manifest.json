@@ -1,0 +1,15 @@
+{
+  "name": "D20 Ninja",
+  "short_name": "D20 Ninja",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#222222",
+  "theme_color": "#2e8b57",
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

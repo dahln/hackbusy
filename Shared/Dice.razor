@@ -2,23 +2,20 @@
 
 <tr class="dice-row">
     <td>
-            <span class="dice-label">@Name</span>
+        <span class="dice-label">@Name</span>
     </td>
     <td>
-            <div class="container">
-                    <div class="container-shape @_spin">
-                            <i class="bi @Shape dice-shape" style="color: @Color"></i>
-                    </div>
-                    <div class="container-number">
-                            <span class="dice-number @(_result >= 10 ? "dice-shape-label-double" : "dice-shape-label-single")">@_result</span>
-                    </div>
+        <div class="container pointer" @onclick="()=>Roll(20)" disabled="@(string.IsNullOrEmpty(_spin) == false)">
+            <div class="container-shape @_spin">
+                <i class="bi @Shape dice-shape" style="color: @Color"></i>
             </div>
-    </td>
-    <td>
-            <input type="button" class="btn btn-info btn-roll" value="Roll" @onclick="()=>Roll(20)" disabled="@(string.IsNullOrEmpty(_spin) == false)" /> <br/>
+            <div class="container-number">
+                <span class="dice-number @(_result >= 10 ? "dice-shape-label-double" : "dice-shape-label-single")">@_result</span>
+            </div>
+        </div>
     </td>
     <td class="nowrap">
-        <button class="btn btn-outline-info btn-reset"  @onclick="History" disabled="@(string.IsNullOrEmpty(_spin) == false)">
+        <button class="btn btn-outline-info btn-reset" @onclick="History" disabled="@(string.IsNullOrEmpty(_spin) == false)">
             <span class="xCount">x@(_history.Count)</span>
             <br />
             <span class="xTotal">@(_history.Sum())</span>
