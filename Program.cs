@@ -7,10 +7,8 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Blazored.Toast;
 using Blazored.LocalStorage;
 using Blazored.Modal;
-using BlazorSpinner;
 
 namespace dice
 {
@@ -21,10 +19,7 @@ namespace dice
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddScoped<SpinnerService>();
-
             builder.Services.AddBlazoredLocalStorage();
-            builder.Services.AddBlazoredToast();
             builder.Services.AddBlazoredModal();
 
             await builder.Build().RunAsync();
