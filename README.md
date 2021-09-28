@@ -1,4 +1,5 @@
 # Dice
+[![Azure Static Web Apps CI/CD](https://github.com/dahln/dice/actions/workflows/azure-static-web-apps-white-pebble-0459d2c10.yml/badge.svg)](https://github.com/dahln/dice/actions/workflows/azure-static-web-apps-white-pebble-0459d2c10.yml)
 
 ## Production URL: 
 https://d20.ninja
