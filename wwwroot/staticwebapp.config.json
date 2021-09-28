@@ -1,6 +1,6 @@
 {
     "navigationFallback": {
         "rewrite": "/index.html",
-        "exclude": ["/.well-known/*.*"]
+        "exclude": ["/.well-known/*.{json}"]
     }
 }
