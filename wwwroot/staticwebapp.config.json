@@ -6,8 +6,7 @@
         }
     ],
     "navigationFallback": {
-        "rewrite": "/index.html",
-        "exclude": [".well-known/assetlinks.json"]
+        "rewrite": "/index.html"
     }
 }
 
