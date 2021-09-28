@@ -1,11 +1,10 @@
 {
     "routes": [
         {
-          "route": "/.well-known/*"
+          "route": "/.well-known/assetlinks.json"
         }
     ],
     "navigationFallback": {
-        "rewrite": "/index.html",
-        "exclude": ["/.well-known/*"]
+        "rewrite": "/index.html"
     }
 }
