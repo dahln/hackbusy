@@ -1,7 +1,5 @@
 # Dice
 
-[![Azure Static Web Apps CI/CD](https://github.com/dahln/dice/actions/workflows/azure-static-web-apps-black-hill-071bb3810.yml/badge.svg)](https://github.com/dahln/dice/actions/workflows/azure-static-web-apps-black-hill-071bb3810.yml)
-
 ## Production URL: 
 https://d20.ninja
 
