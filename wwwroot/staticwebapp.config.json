@@ -1,7 +1,8 @@
 {
     "routes": [
         {
-            "route": ".well-known/assetlinks.json"
+            "route": "/.well-known/assetlinks.json",
+            "redirect": "/assetlinks.json"
         }
     ],
     "navigationFallback": {
