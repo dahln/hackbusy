@@ -1,6 +1,11 @@
 {
+    "routes": [
+        {
+          "route": "/.well-known/*"
+        }
+    ],
     "navigationFallback": {
         "rewrite": "/index.html",
-        "exclude": ["/.well-known/*.{json}"]
+        "exclude": ["/.well-known/*"]
     }
 }
