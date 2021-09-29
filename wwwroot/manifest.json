@@ -1,20 +1,28 @@
 {
   "name": "D20 Ninja",
   "short_name": "D20 Ninja",
+  "description": "A simple digital dice rolling app, with multiple sizes of dice. Easily add results together. App is D20 system compatible. Perfect for Dungeon & Dragaons (DnD), Pathfinder, etc.",
+  "lang": "en-US",
   "start_url": "./",
   "display": "standalone",
+  "orientation": "any",
   "background_color": "#222222",
   "theme_color": "#2e8b57",
   "icons": [
     {
-      "src": "icon-512.png",
+      "src": "/src/icons/app-icon-48x48.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "48x48"
     },
     {
-      "src": "/icons/play-later.svg",
-      "type": "image/svg+xml",
-      "purpose": "any"
+      "src": "/src/icons/app-icon-128x128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "/src/icons/app-icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
-  ]
+  ]  
 }
