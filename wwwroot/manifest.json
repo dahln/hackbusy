@@ -28,7 +28,8 @@
   "screenshots": [
     {
       "src": "screenshot1.png",
-      "type": "image/png"
+      "type": "image/png",
+      "sizes": "1079x1919"
     }
   ]  
 }
