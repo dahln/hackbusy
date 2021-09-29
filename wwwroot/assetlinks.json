@@ -1,6 +1,6 @@
 [{
         "relation": ["delegate_permission/common.handle_all_urls"],
         "target" : { "namespace": "android_app", "package_name": "ninja.d20.dahln",
-                     "sha256_cert_fingerprints": ["94:22:39:BB:AB:F7:B0:13:A1:27:23:C6:72:06:40:B8:B1:61:F7:76:59:A6:BC:96:8F:7D:94:19:62:85:DF:6F"] }
+                     "sha256_cert_fingerprints": ["73:C2:7C:36:24:BD:B7:5E:D4:E9:8A:36:5A:DF:95:3F:70:9E:38:86:D4:FA:61:E4:D2:0E:19:6A:50:E3:96:7A"] }
       }
 ]
