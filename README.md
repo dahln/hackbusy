@@ -1,5 +1,7 @@
 # hackbusy
 
+[![Azure Static Web Apps CI/CD](https://github.com/dahln/hackbusy/actions/workflows/azure-static-web-apps-thankful-island-0efa84510.yml/badge.svg)](https://github.com/dahln/hackbusy/actions/workflows/azure-static-web-apps-thankful-island-0efa84510.yml)
+
 ## Production URL: 
 https://hackbusy.com
 
