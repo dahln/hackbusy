@@ -7,10 +7,8 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Blazored.LocalStorage;
-using Blazored.Modal;
 
-namespace dice
+namespace hackbusy
 {
     public class Program
     {
@@ -18,9 +16,6 @@ namespace dice
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
-
-            builder.Services.AddBlazoredLocalStorage();
-            builder.Services.AddBlazoredModal();
 
             await builder.Build().RunAsync();
         }

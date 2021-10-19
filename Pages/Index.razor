@@ -1,56 +1,84 @@
 ﻿@page "/"
 
-<div class="row">
-    <div class="col-md-12">
-        <a href="/faq" class="float-right"><i class="far fa-question-circle mr-2"></i>FAQ</a>
+<div class="row mt-5">
+    <div class="col-lg-8 offset-lg-2 mt-5">
+        <strong>@_processing[_processingIndex]...</strong>
+        <strong class="float-right">@_completed of @_queue completed</strong>
     </div>
 </div>
 <div class="row">
-        <div class="col-md-12 table-responsize">
-
-            <table class="mx-auto">
-                <Dice Name="D20" Shape="bi-hexagon-fill" Size="20" Color="#CD7900" />
-                <Dice Name="D12" Shape="bi-pentagon-fill" Size="12" Color="#3F1928" />
-                <Dice Name="D10" Shape="bi-diamond-fill" Size="10" Color="#17273E" />
-                <Dice Name="D8" Shape="bi-diamond-fill" Size="8" Color="#9D3800" />
-                <Dice Name="D6" Shape="bi-square-fill" Size="6" Color="#183626" />
-                <Dice Name="D4" Shape="bi-triangle-fill" Size="4" Color="#650808" />
-            </table>
+    <div class="col-lg-8 offset-lg-2">
+        <div class="progress" style="height: 25px;">
+            <div class="progress-bar" role="progressbar" style="width: @_percent%" aria-valuenow="@_percent" aria-valuemin="0" aria-valuemax="100">@_percent%</div>
         </div>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-lg-8 offset-lg-2">
+        <span class="hash">Hash: @_hash</span>
+    </div>
 </div>
 
-@* <div class="row">
-    <div class="col dice-column">
-        <Dice Name="D20" Shape="bi-hexagon-fill" Size="20" />
-    </div>
-</div>
-<div class="row mt-5 pt-5">
-    <div class="col dice-column">
-        <Dice Name="D12" Shape="bi-pentagon-fill" Size="12" />
-    </div>
-</div>
-<div class="row mt-5 pt-5">
-    <div class="col dice-column">
-        <Dice Name="D10" Shape="bi-diamond-fill" Size="10" />
-    </div>
-</div>
-<div class="row mt-5 pt-5">
-    <div class="col dice-column">
-        <Dice Name="D8" Shape="bi-diamond-fill" Size="8" />
-    </div>
-</div>
-<div class="row mt-5 pt-5">
-    <div class="col dice-column">
-        <Dice Name="D6" Shape="bi-square-fill" Size="6" />
-    </div>
-</div>
-<div class="row mt-5 pt-5">
-    <div class="col dice-column">
-        <Dice Name="D4" Shape="bi-triangle-fill" Size="4" />
-    </div>
-</div> *@
 
 @code {
+
+    private int _percent { get; set; } = 0;
+    private int _processingIndex { get; set; } = 0;
+    private List<string> _processing { get; set; } = new List<string>()
+    {
+        "Processing",
+        "Compressing",
+        "Sending",
+        "Extracting",   
+        "Calculating",   
+        "Terminating",   
+        "Moving",   
+        "Copying",   
+        "Parsing",   
+        "Loading",   
+        "Transfering",   
+        "Determining Derivative",   
+        "Translating",   
+        "Solving",   
+        "Opening",   
+        "Building",   
+        "Compiling",   
+        "Encrypting",   
+    };
+    private string _hash { get; set; }
+    private int _completed { get; set; } = 0;
+    private int _queue { get; set; } = 5;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadLoop();
+    }
+
+    public async Task LoadLoop()
+    {
+        Random rand = new Random();
+        for(_percent = 0; _percent <= 100; _percent++)
+        {
+            if(_percent >= 100)
+            {
+                await Task.Delay(1000);
+
+                _percent = 0;
+                _hash = "";
+                _queue += rand.Next(0,5);
+                _completed++;
+                StateHasChanged();
+                await Task.Delay(1000);
+            }
+            else
+            {
+                _processingIndex = rand.Next(0, _processing.Count);
+                _hash = $"{Guid.NewGuid().ToString()}-{Guid.NewGuid().ToString()}";
+                StateHasChanged();
+                await Task.Delay(rand.Next(1,300));
+            }
+        }
+    }
 
 }
 
