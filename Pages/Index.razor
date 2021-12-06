@@ -75,7 +75,7 @@
                 _processingIndex = rand.Next(0, _processing.Count);
                 _hash = $"{Guid.NewGuid().ToString()}-{Guid.NewGuid().ToString()}";
                 StateHasChanged();
-                await Task.Delay(rand.Next(1,300));
+                await Task.Delay(rand.Next(100,600));
             }
         }
     }
